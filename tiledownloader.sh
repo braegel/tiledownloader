@@ -52,6 +52,7 @@ TILES=$((($Xmax-$Xmin+1)*($Ymax-$Ymin+1)))
 echo "Deleting cache" # tode
 rm -rf tile_cache
 mkdir tile_cache
+rm url_cache
 
 echo "Download $TILES tiles"
 for X in $(seq $Xmin $Xmax);
@@ -61,7 +62,6 @@ do
 	FILENAME="$ZOOM-$Y-$X.png"
 	if [ ! -f "tile_cache/$FILENAME" ]; then
 	    #	    URL="http://abo.wanderreitkarte.de/php/abosrv.php?url=/$ZOOM/$X/$Y.png&ticket=$APIKEY"
-
 	    #randomize server
 	    RND=$(shuf -i 1-3 -n 1)
 	    if ((RND==1)); then
@@ -75,15 +75,14 @@ do
 	    fi
 	    
 	    URL="https://$SERVER.tile.opentopomap.org/$ZOOM/$X/$Y.png"
-	    echo "Downloading $URL"
-	    curl -s -o "tile_cache/$FILENAME" "$URL"
+	    echo $URL >> url_cache
 	else
-	    echo "$FILENAME exists, not downloading"
+	    echo "$FILENAME exists"
 	fi
 	DONE=$(($DONE+1))
 	echo "$DONE/$TILES"
     done
 done
 #rm "out/out_z${Z}_${X1}_${Y1}-${X2}_${Y2}.png"
-montage -mode concatenate -tile "$((Xmax-Xmin+1))x" "tile_cache/*.png" "out/$ZOOM_$ARGLAT_$ARGLONG                                               
-}                                                                                                        │107/121                   .png"
+aria2c -d tile_cache -i url_cache -j 3
+montage -mode concatenate -tile "$((Xmax-Xmin+1))x" "tile_cache/*.png" "out/$ZOOM_$TILE_X_$TILE_Y.png"

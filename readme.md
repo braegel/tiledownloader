@@ -9,5 +9,5 @@ This is a tile downloading script I'w writing for downloading tiles from alterna
 Browser for tile numbers: [Maptiler](https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
 
 # Dependencies
-- curl
+- aria2
 - ImageMagick
