@@ -63,6 +63,7 @@ do
 	if [ ! -f "tile_cache/$FILENAME" ]; then
 	    #	    URL="http://abo.wanderreitkarte.de/php/abosrv.php?url=/$ZOOM/$X/$Y.png&ticket=$APIKEY"
 	    #randomize server
+	    
 	    RND=$(shuf -i 1-3 -n 1)
 	    if ((RND==1)); then
 		SERVER='a'
@@ -75,7 +76,8 @@ do
 	    fi
 	    
 	    URL="https://$SERVER.tile.opentopomap.org/$ZOOM/$X/$Y.png"
-	    echo $URL >> url_cache
+	    echo "$URL" >> url_cache
+	    echo " out=$FILENAME" >> url_cache
 	else
 	    echo "$FILENAME exists"
 	fi
@@ -85,4 +87,5 @@ do
 done
 #rm "out/out_z${Z}_${X1}_${Y1}-${X2}_${Y2}.png"
 aria2c -d tile_cache -i url_cache -j 3
-montage -mode concatenate -tile "$((Xmax-Xmin+1))x" "tile_cache/*.png" "out/$ZOOM_$TILE_X_$TILE_Y.png"
+#montage -mode concatenate -tile "$((Xmax-Xmin+1))x" "tile_cache/*.png" "out/$ZOOM-$TILE_X-$TILE_Y.png"
+montage -mode concatenate "tile_cache/*.png" "out/$ZOOM-$TILE_X-$TILE_Y.png"
