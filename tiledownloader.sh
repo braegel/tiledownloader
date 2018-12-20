@@ -7,6 +7,9 @@ ARGLONG=$3
 #CONFIGFILE=$6
 #source $CONFIGFILE
 
+mkdir tile_cache
+mkdir out
+
 long2xtile()  
 { 
  long=$1
