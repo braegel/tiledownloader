@@ -172,4 +172,4 @@ esac
 # 39.37 conversion m = inch
 DPI=`echo "$SCALE/($ARGLAT*(4*a(1)/180)*$CONV*39.37)" | bc -l`
 echo "Convert out/$ZOOM-$TILE_X-$TILE_Y.png to PDF 1:$SCALE ($DPI px/inch)"
-convert -density 884 "out/$ZOOM-$TILE_X-$TILE_Y.png" "out/$ZOOM-$TILE_X-$TILE_Y.pdf"
+convert -density "$DPI" "out/$ZOOM-$TILE_X-$TILE_Y.png" "out/$ZOOM-$TILE_X-$TILE_Y.pdf"
