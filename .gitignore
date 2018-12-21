@@ -10,7 +10,8 @@
 *_REMOTE_*
 
 *.config
+*.key
 out/*
 tile_cache/*
 url_cache
-
+apikey

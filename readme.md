@@ -2,12 +2,12 @@ This is a tile downloading script I'w writing for downloading tiles from alterna
 
 # Usage
 
-./tiledownloader.sh Zoom Xmin Xmax Ymin Ymax configfile
+./tiledownloader.sh Zoom Scale Lat Lon
 
-# help
-
-Browser for tile numbers: [Maptiler](https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+	* Zoom - Zoom level of Tile server (e.g. 16)
+	* Scale - Output Scale (eg. 25000 for a 1:25.000 map)
 
 # Dependencies
 - aria2
 - ImageMagick
+- bc
